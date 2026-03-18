@@ -1,17 +1,22 @@
+import os
 from openai import OpenAI
 from supabase import create_client, Client
 from dotenv import load_dotenv
-import os
 
 load_dotenv()
 
-openai_api_key = os.getenv("OPENAI_API_KEY")
+# OpenAI config
+openai_api_key = os.environ.get("OPENAI_API_KEY")
 if not openai_api_key:
-    raise ValueError("OPENAI_API_KEY environment variable is not set.")
+    raise ValueError("OpenAI API key is missing or invalid.")
+openai = OpenAI(api_key=openai_api_key)
 
-supabase_url = os.getenv("SUPABASE_URL")
-supabase_api_key = os.getenv("SUPABASE_API_KEY")
-if not supabase_url or not supabase_api_key:
-    raise ValueError("SUPABASE_URL and SUPABASE_API_KEY environment variables must be set.")
+# Supabase config
+private_key = os.environ.get("SUPABASE_API_KEY")
+if not private_key:
+    raise ValueError("Expected env var SUPABASE_API_KEY")
+url = os.environ.get("SUPABASE_URL")
+if not url:
+    raise ValueError("Expected env var SUPABASE_URL")
 
-supabase_client: Client = create_client(supabase_url, supabase_api_key)
+supabase: Client = create_client(url, private_key)

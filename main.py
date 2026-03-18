@@ -1,4 +1,5 @@
 import streamlit as st
+from rag import rag_pipeline
 
 st.title("DocuChat 🗂️")
 
@@ -43,8 +44,7 @@ if prompt:
         st.write(prompt)
 
     with st.spinner("Thinking..."):
-        response = "your RAG answer here"
-    
+        response = rag_pipeline(uploaded_file, prompt)
     st.session_state.messages.append({"role": "assistant", "content": response})
     with st.chat_message("assistant"):
         st.write(response)
