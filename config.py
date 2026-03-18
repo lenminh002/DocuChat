@@ -12,11 +12,11 @@ if not openai_api_key:
 openai = OpenAI(api_key=openai_api_key)
 
 # Supabase config
-private_key = os.environ.get("SUPABASE_API_KEY")
-if not private_key:
+supabase_key = os.environ.get("SUPABASE_API_KEY")
+if not supabase_key:
     raise ValueError("Expected env var SUPABASE_API_KEY")
 url = os.environ.get("SUPABASE_URL")
 if not url:
     raise ValueError("Expected env var SUPABASE_URL")
 
-supabase: Client = create_client(url, private_key)
+supabase: Client = create_client(url, supabase_key)
