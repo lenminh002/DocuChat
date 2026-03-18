@@ -17,19 +17,17 @@ if uploaded_file:
 uploaded_file = st.session_state.uploaded_file
 
 
-# initialize chat history
+# initialize and displaychat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# display chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
 
 
-
-
+# disable chat input if no document uploaded
 if uploaded_file is None:
     st.info("Please upload a document to start chatting.")
     prompt = st.chat_input("Ask a question about the document", disabled=True)
