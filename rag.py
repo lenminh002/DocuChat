@@ -62,6 +62,7 @@ def create_embeddings(document_chunks: list) -> list[dict]:
 
 # Store the embeddings in Supabase
 def store_embeddings(embeddings: list[dict]):
+    supabase.table("documents").delete().neq("id", 0).execute()
     supabase.table("documents").insert(embeddings).execute()
 
 
