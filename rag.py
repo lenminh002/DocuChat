@@ -3,8 +3,6 @@ from config import supabase, openai
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
-# This is the instruction we give the AI before every conversation.
-# It tells the AI to only answer based on the document the user uploaded.
 system_prompt = """
 You are a precise, knowledgeable assistant. Answer questions using only the provided context from the uploaded document.
 
@@ -107,4 +105,4 @@ def rag_pipeline(uploaded_file, user_prompt: str) -> str:
     embeddings = create_embeddings(document_chunks)
     store_embeddings(embeddings)
     context = retrieve_context(user_prompt)
-    return getChatCompletion(user_prompt, context)
+    return getChatCompletion(user_prompt, context) 
